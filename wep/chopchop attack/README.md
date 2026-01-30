@@ -40,5 +40,5 @@ aireplay-ng -2 -r [output_packetforge] -h [mac_attacker] [interface]
 #### 7. Crack Kunci WEP
 
 ```
-aircrack-ng -1 [file_ivs]
+aircrack-ng -a 1 [file_ivs]
 ```
