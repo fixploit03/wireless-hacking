@@ -2,6 +2,18 @@
 
 ARP Request Replay Attack adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑Fi WEP dengan cara menangkap paket ARP yang valid lalu mengirimkannya kembali (replay) secara berulang ke access point (AP) untuk memaksa AP menghasilkan banyak IV, sehingga proses pengumpulan IV dapat dipercepat dan kunci WEP dapat di‑crack.
 
+## Persyaratan
+- Linux
+- Adapter Wi‑Fi (mendukung mode monitor)
+- Koneksi internet
+
+## Instal Tools
+
+```
+sudo apt-get update
+sudo apt-get install aircrack-ng
+```
+
 ## Langkah-Langkah
 
 #### 1. Aktifkan Mode Monitor
