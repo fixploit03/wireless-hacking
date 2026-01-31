@@ -1,5 +1,12 @@
 # PMKID Attack
 
+PMKID Attack adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑Fi WPA/WPA2‑PSK dengan cara menangkap PMKID langsung dari access point (AP) tanpa perlu melakukan serangan deauthentication seperti pada serangan tradisional yang digunakan untuk menangkap 4‑Way Handshake.
+
+> [!NOTE]
+> Tidak semua Router atau AP mendukung PMKID.
+
+## Langkah-Langkah
+
 #### 1. Aktifkan Mode Monitor
 
 ```
