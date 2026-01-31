@@ -2,6 +2,18 @@
 
 Chopchop Attack adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑Fi WEP dengan cara mendekripsi paket data secara bertahap menggunakan metode byte‑per‑byte, memanfaatkan kelemahan algoritma RC4 pada WEP untuk menghasilkan paket palsu yang kemudian di‑inject ke jaringan guna mempercepat pengumpulan IV sebelum kunci WEP di‑crack.
 
+## Persyaratan
+- Linux
+- Adapter Wi‑Fi (mendukung mode monitor)
+- Koneksi internet
+
+## Instal Tools
+
+```
+sudo apt-get update
+sudo apt-get install aircrack-ng
+```
+
 ## Langkah-Langkah
 
 #### 1. Aktifkan Mode Monitor
