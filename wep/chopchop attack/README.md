@@ -1,5 +1,9 @@
 # Chopchop Attack
 
+Chopchop Attack adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑Fi WEP dengan cara mendekripsi paket data secara bertahap menggunakan metode byte‑per‑byte, memanfaatkan kelemahan algoritma RC4 pada WEP untuk menghasilkan paket palsu yang kemudian di‑inject ke jaringan guna mempercepat pengumpulan IV sebelum kunci WEP di‑crack.
+
+## Langkah-Langkah
+
 #### 1. Aktifkan Mode Monitor
 
 ```
