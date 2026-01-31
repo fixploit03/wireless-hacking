@@ -1,5 +1,9 @@
 # Capture 4-Way Handshake
 
+Capture 4‑Way Handshake adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑Fi WPA/WPA2‑PSK dengan cara menangkap proses 4‑Way Handshake antara client dan access point (AP), biasanya dengan bantuan serangan deauthentication untuk memaksa client melakukan koneksi ulang agar handshake dapat tertangkap.
+
+## Langkah-Langkah
+
 #### 1. Aktifkan Mode Monitor
 
 ```
