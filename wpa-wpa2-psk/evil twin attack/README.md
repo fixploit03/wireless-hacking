@@ -17,7 +17,7 @@ apt-get install aircrack-ng hostapd dnsmasq iptables apache2 php libapache2-mod-
 ## Langkah-Langkah
 
 > [!NOTE]
-> Semua file yang ada di direktori `conf` harus disesuaikan dengan target.
+> Semua file yang ada di direktori [conf](https://github.com/fixploit03/wireless-hacking/tree/main/wpa-wpa2-psk/evil%20twin%20attack/conf) harus disesuaikan dengan target.
 
 #### 1. Aktifkan Mode Monitor
 
