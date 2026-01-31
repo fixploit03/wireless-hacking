@@ -1,6 +1,18 @@
 # Capture 4-Way Handshake
 
-Capture 4‑Way Handshake adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑Fi WPA/WPA2‑PSK dengan cara menangkap proses 4‑Way Handshake antara client dan access point (AP), biasanya dengan bantuan serangan deauthentication untuk memaksa client melakukan koneksi ulang agar handshake dapat tertangkap.
+Capture 4-Way Handshake adalah teknik yang digunakan untuk menguji keamanan jaringan Wi-Fi WPA/WPA2-PSK dengan cara menangkap proses autentikasi 4-Way Handshake antara client dan access point (AP) yang terjadi saat client terhubung ke jaringan Wi-Fi. Handshake yang berhasil ditangkap dapat digunakan untuk melakukan serangan offline guna menguji kekuatan password Wi-Fi, seperti dictionary attack, brute-force attack, atau Pre-Computed PMK.
+
+## Persyaratan
+- Linux
+- Adapter Wi‑Fi (mendukung mode monitor)
+- Koneksi internet
+  
+## Instal Tools
+
+```
+apt-get update
+apt-get install aircrack-ng
+```
 
 ## Langkah-Langkah
 
@@ -17,7 +29,7 @@ airmon-ng start [interface]
 airodump-ng --encrypt wpa [interface]
 ```
 
-#### 3. Capture 4-Way Handshake
+#### 3. Capture Handshake
 
 ```
 airodump-ng --bssid [bssid] --channel [channel] --write [output] [interface]
