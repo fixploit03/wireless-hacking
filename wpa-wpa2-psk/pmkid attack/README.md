@@ -5,6 +5,18 @@ PMKID Attack adalah teknik yang digunakan untuk menguji keamanan jaringan Wi‑F
 > [!NOTE]
 > Tidak semua Router atau AP mendukung PMKID.
 
+## Persyaratan
+- Linux
+- Adapter Wi‑Fi (mendukung mode monitor)
+- Koneksi internet
+
+## Instal Tools
+
+```
+sudo apt-get update
+sudo apt-get install aircrack-ng wireshark hcxdumptool hcxtools hashcat hashcat-data
+```
+
 ## Langkah-Langkah
 
 #### 1. Aktifkan Mode Monitor
