@@ -1,6 +1,20 @@
 # Pre‑Computed PMK
 
-Pre‑Computed PMK adalah teknik menghitung Pairwise Master Key (PMK) terlebih dahulu berdasarkan ESSID dan wordlist untuk mempercepat proses cracking kunci WPA/WPA2‑PSK.
+Pre-Computed PMK adalah teknik optimasi dalam cracking kunci WPA/WPA2-PSK dengan cara menghitung dan menyimpan Pairwise Master Key (PMK) terlebih dahulu dari kombinasi ESSID dan daftar password ke dalam sebuah database. PMK yang telah dihitung ini kemudian digunakan kembali untuk proses pencocokan terhadap handshake WPA/WPA2-PSK yang ditangkap. Teknik ini mempercepat proses cracking karena perhitungan PMK menggunakan PBKDF2-HMAC-SHA1 dengan 4096 iterasi, yang mahal secara komputasi, tidak perlu dilakukan berulang kali untuk ESSID yang sama.
+
+## Persyaratan
+- Linux
+- File capture yang berisi handshake WPA/WPA2‑PSK
+- File txt yang berisi daftar ESSID
+- File txt yang berisi daftar password (wordlist)
+- Koneksi internet
+
+## Instal Tools
+
+```
+apt-get update
+apt-get install aircrack-ng
+```
 
 ## Langkah-Langkah
 
