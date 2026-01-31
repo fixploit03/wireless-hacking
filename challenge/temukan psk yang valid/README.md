@@ -86,7 +86,7 @@ tshark -r eapol1.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -x
 tshark -r eapol2.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -x
 ```
 
-![](https://github.com/fixploit03/wireless-hacking/blob/main/notes/cara%20kerja%20aircrack-ng/img/tshark.png)
+![](https://github.com/fixploit03/wireless-hacking/blob/main/challenge/temukan%20psk%20yang%20valid/img/tshark.png)
 
 #### 7. Menghitung MIC
 
