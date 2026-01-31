@@ -1,10 +1,12 @@
 # Cara Kerja Aircrack-NG
 
-Buat ngecek password WPA/WPA2-PSK, Aircrack-NG kaga langsung nyerang AP, tapi dia ngecrack password secara offline make data dari 4-Way Handshake yang ada di file capture.
+Untuk menguji kata sandi Wi-Fi WPA/WPA2-PSK, Aircrack-NG tidak melakukan serangan secara langsung terhadap Access Point (AP). Proses cracking dilakukan secara offline dengan memanfaatkan data 4-Way Handshake yang tersimpan dalam file capture.
 
-Bahan yang diperluin:
+Aircrack-NG akan mencoba berbagai kandidat kata sandi, kemudian memverifikasi kebenarannya dengan cara menghitung nilai MIC (Message Integrity Code) dan membandingkannya dengan MIC yang terdapat pada frame EAPOL.
+
+Data yang diperlukan:
 - SSID
-- Password (PSK)
+- PSK
 - MAC AP
 - MAC STA
 - ANonce
@@ -12,54 +14,100 @@ Bahan yang diperluin:
 - EAPOL Frame M2
 
 > [!NOTE]
-> Di EAPOL Frame M2 ada MIC, yang nantinya dipake buat ngebandingin sama MIC yang lu itung sendiri. Kalo MIC yang lu itung itu sama ama MIC yang ada di EAPOL Frame M2, berarti kata sandinya bener.
+> Pada EAPOL Frame Message 2 (M2) terdapat nilai MIC. Nilai MIC ini digunakan sebagai pembanding dengan MIC yang dihitung secara lokal menggunakan kata sandi yang sedang diuji.
+>
+> Jika nilai MIC hasil perhitungan sama dengan MIC pada EAPOL M2, maka kata sandi tersebut valid.
 
 ## Latihan
 
-Gw punya bahan buat lu pake:
-- File capture:
-  - `beacon.pcapng`
-  - `eapol1.pcapng`
-  - `eapol2.pcapng`
-- Password:
+> [!NOTE]
+> Agar Anda memahami apa yang sedang dikerjakan, silakan baca catatan berikut: [http://github.com/fixploit03/wireless-hacking/tree/main/notes/4-way%20handshake](http://github.com/fixploit03/wireless-hacking/tree/main/notes/4-way%20handshake)
+
+**Kisi-Kisi:**
+- File Capture:
+  - `beacon.pcapng`: Berisi beacon frame
+  - `eapol1.pcapng`: Berisi EAPOL frame M1-M4
+  - `eapol2.pcapng`: Berisi EAPOL frame M1-M2
+- Kandidat Password Wi-Fi:
   - `10101010`
   - `12345678`
-- Script python buat ngitung MIC
+    
+Berikut langkah-langkah untuk mengekstrak setiap parameter yang dibutuhkan dari file capture menggunakan `tshark`.
 
-**Tugas**
-
-#### 1. Cari SSID
-
-```
-tshark -r [file_capture] -Y "wlan.fc.type_subtype == 8" -T fields -e "wlan.ssid" | xxd -r -p
-```
-
-#### 2. Cari MAC AP
+#### 1. Mencari SSID
 
 ```
-tshark -r [file_capture] -Y "wlan.fc.type_subtype == 8" -T fields -e "wlan.sa"
+tshark -r beacon.pcapng -Y "wlan.fc.type_subtype == 8" -T fields -e "wlan.ssid" | xxd -r -p
 ```
 
-#### 3. Cari MAC STA
+#### 2. Mencari MAC AP
 
 ```
-tshark -r [file_capture] -Y "wlan_rsna_eapol.keydes.msgnr == 2" -T fields -e "wlan.sa"
+tshark -r beacon.pcapng -Y "wlan.fc.type_subtype == 8" -T fields -e "wlan.sa" | tr -d ":"
 ```
 
-#### 4. Cari ANonce
+#### 3. Mencari MAC STA
 
 ```
-tshark -r [file_capture] -Y "wlan_rsna_eapol.keydes.msgnr == 1" -T fields -e "wlan_rsna_eapol.keydes.nonce"
+tshark -r eapol1.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -T fields -e "wlan.sa" | tr -d ":"
 ```
 
-#### 5. Cari SNonce
-
 ```
-tshark -r [file_capture] -Y "wlan_rsna_eapol.keydes.msgnr == 2" -T fields -e "wlan_rsna_eapol.keydes.nonce"
+tshark -r eapol2.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -T fields -e "wlan.sa" | tr -d ":"
 ```
 
-#### 6. Cari EAPOL Frame M2
+#### 4. Mencari ANonce
 
 ```
-tshark -r[file_capture] -Y "wlan_rsna_eapol.keydes.msgnr == 2" -x
+tshark -r eapol1.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 1" -T fields -e "wlan_rsna_eapol.keydes.nonce"
+```
+
+```
+tshark -r eapol2.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 1" -T fields -e "wlan_rsna_eapol.keydes.nonce"
+```
+
+#### 5. Mencari SNonce
+
+```
+tshark -r eapol1.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -T fields -e "wlan_rsna_eapol.keydes.nonce"
+```
+
+```
+tshark -r eapol2.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -T fields -e "wlan_rsna_eapol.keydes.nonce"
+```
+
+#### 6. Mencari EAPOL Frame M2
+
+```
+tshark -r eapol1.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -x
+```
+
+```
+tshark -r eapol2.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -x
+```
+
+![](https://github.com/fixploit03/wireless-hacking/blob/main/notes/cara%20kerja%20aircrack-ng/img/tshark.png)
+
+#### 7. Menghitung MIC
+
+Nilai MIC asli yang terdapat pada EAPOL M2:
+
+```
+2def380782197cde26d755ac436e2ec1
+```
+
+Lakukan perhitungan MIC menggunakan script Python:
+
+```
+python3 main.py
+```
+
+Jika nilai MIC yang dihasilkan identik dengan MIC pada EAPOL M2, maka kata sandi yang diuji adalah benar.
+
+## Tantangan
+
+Tentukan kata sandi Wi‑Fi yang valid:
+
+```
+_ _ _ _ _ _ _ _
 ```
