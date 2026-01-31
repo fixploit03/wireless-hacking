@@ -29,8 +29,16 @@ Aircrack-NG akan mencoba berbagai kandidat kata sandi, lalu memverifikasi kebena
   - `eapol1.pcapng`: Berisi EAPOL frame M1-M4
   - `eapol2.pcapng`: Berisi EAPOL frame M1-M2
 - **Kandidat Password Wi-Fi:**
+  - `88888888`
   - `10101010`
   - `12345678`
+  - `password`
+  - `rahasia123`
+  - `qwertyuiop`
+  - `latihan`
+  - `00000000`
+  - `11111111`
+  - `01010101`
 
 Berikut langkah-langkah untuk mengekstrak setiap parameter yang dibutuhkan dari file capture menggunakan `tshark`:
 
