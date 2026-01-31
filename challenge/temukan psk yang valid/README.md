@@ -90,11 +90,7 @@ tshark -r eapol2.pcapng -Y "wlan_rsna_eapol.keydes.msgnr == 2" -x
 
 #### 7. Menghitung MIC
 
-Nilai MIC asli yang terdapat pada EAPOL M2:
-
-```
-2def380782197cde26d755ac436e2ec1
-```
+Target MIC diperoleh dari file capture yang menyelesaikan proses 4‑Way Handshake.
 
 Lakukan perhitungan MIC menggunakan script Python:
 
