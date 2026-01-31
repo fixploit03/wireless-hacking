@@ -214,7 +214,7 @@ AP nerima SNonce dari client, terus dia:
 Kalo MIC nya bener:
 - Artinya password yang dipake sama client bener
 - AP lanjut:
-  - Ngirim GTK (yang udah keenkripsi)
+  - Ngirim GTK (yang udah keenkripsi make KEK)
   - Ngirim MIC
   - Ngasih tau client buat nginstal kunci
 
