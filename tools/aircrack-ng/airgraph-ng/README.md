@@ -10,7 +10,7 @@ Grafik yang dihasilkan yaitu grafik yang menampilkan hubungan antara client deng
 
 Output:
 
-![img]()
+![img](https://github.com/fixploit03/wireless-hacking/blob/main/tools/aircrack-ng/airgraph-ng/img/capr.png)
 
 #### Membuat grafik CPG:
 
@@ -22,4 +22,4 @@ Grafik yang dihasilkan yaitu grafik yang menampilkan probe request umum dari ber
 
 Output:
 
-![img]()
+![img](https://github.com/fixploit03/wireless-hacking/blob/main/tools/aircrack-ng/airgraph-ng/img/cpg.png)
