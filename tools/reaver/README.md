@@ -1,12 +1,26 @@
 # Reaver
 
-#### 1. Scan Wi-Fi yang mengaktifkan WPS:
+## Langkah-Langkah
+
+#### 1. Kill semua proses yang mengganggu:
+
+```
+sudo airmon-ng check kill
+```
+
+#### 2. Aktifkan Mode Monitor:
+
+```
+sudo airmon-ng start [interface]
+```
+
+#### 3. Scan Wi-Fi yang mengaktifkan WPS:
 
 ```
 sudo wash -i [interface] -s -p
 ```
 
-#### 2. Jalankan Serangan
+#### 4. Jalankan Serangan:
 
 #### Pixie Dust Attack:
 
