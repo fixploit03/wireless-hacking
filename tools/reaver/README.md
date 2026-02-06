@@ -1,5 +1,16 @@
 # Reaver
 
+Homepage: [https://github.com/t6x/reaver-wps-fork-t6x](https://github.com/t6x/reaver-wps-fork-t6x)
+
+## Cara Instal
+
+```
+sudo apt-get update
+sudo apt-get install reaver
+```
+
+## Cara Menggunakan
+
 #### Pixie Dust Attack:
 
 ```
