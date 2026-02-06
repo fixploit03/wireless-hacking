@@ -1,1 +1,0 @@
-Catatan kecil wireless hacking.
