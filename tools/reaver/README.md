@@ -3,7 +3,7 @@
 #### 1. Scan Wi-Fi yang mengaktifkan WPS:
 
 ```
-sudo wash -i [interface] -2 -5 -s -p
+sudo wash -i [interface] -s -p
 ```
 
 #### 2. Jalankan Serangan
