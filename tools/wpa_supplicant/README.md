@@ -1,6 +1,15 @@
 # wpa_supplicant
 
-## Langkah-Langkah
+Homepage: [https://w1.fi/wpa_supplicant/](https://w1.fi/wpa_supplicant/)
+
+## Cara Instal
+
+```
+sudo apt-get update
+sudo apt-get install wpasupplicant
+```
+
+## Cara Menggunakan
 
 #### 1. Stop service NetworkManager:
 
