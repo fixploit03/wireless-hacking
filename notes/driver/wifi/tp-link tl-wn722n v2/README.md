@@ -1,5 +1,7 @@
 # Instal Driver TP-Link TL-WN722N V2
 
+## Langkah-Langkah
+
 #### 1. Update repositori Kali Linux:
 
 ```
@@ -39,9 +41,19 @@ phy0    wlan0           rtl8xxxu        TP-Link TL-WN722N v2/v3 [Realtek RTL8188
 
 ```
 
-Dari output tersebut, driver masih menggunakan `rtl8xxxu`. Driver tersebut tidak direkomendasikan untuk digunakan dalam kegiatan pentest karena sering mengalami berbagai masalah.
+Dari output tersebut, driver masih menggunakan `rtl8xxxu`. Driver tersebut tidak direkomendasikan untuk digunakan dalam kegiatan pentest karena sering mengalami masalah.
 
-#### Solusi: Ganti dengan Driver `8188eu`
+#### Contoh:
+
+![](https://github.com/fixploit03/wireless-hacking/blob/main/notes/driver/wifi/tp-link%20tl-wn722n%20v2/img/packet%20injection%20error.png)
+
+<p align="center">Error saat melakukan tes packet injection</p>
+
+![](https://github.com/fixploit03/wireless-hacking/blob/main/notes/driver/wifi/tp-link%20tl-wn722n%20v2/img/scan%20error.png)
+
+<p align="center">Error saat melakukan scanning menggunakan <code>airodump-ng</code></p>
+
+## Solusi: Ganti dengan Driver `8188eu`
 
 #### 1. Blacklist driver `rtl8xxxu`:
 
@@ -86,3 +98,9 @@ PHY     Interface       Driver          Chipset
 
 phy0    wlan0           8188eu          TP-Link TL-WN722N v2/v3 [Realtek RTL8188EUS]
 ```
+
+## Hasil Setelah Mengganti Driver
+
+![](https://github.com/fixploit03/wireless-hacking/blob/main/notes/driver/wifi/tp-link%20tl-wn722n%20v2/img/packet%20injection%20success.png)
+
+![](https://github.com/fixploit03/wireless-hacking/blob/main/notes/driver/wifi/tp-link%20tl-wn722n%20v2/img/scan%20success.png)
