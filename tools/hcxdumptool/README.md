@@ -11,25 +11,25 @@ sudo apt-get install hcxdumptool
 
 ## Cara Menggunakan
 
-#### Melihat daftar interface yang tersedia:
+#### 1. Melihat daftar interface yang tersedia:
 
 ```
 hcxdumptool -L
 ```
 
-#### Melihat detail informasi interface wireless:
+#### 2. Melihat detail informasi interface wireless:
 
 ```
 hcxdumptool -I [interface]
 ```
 
-#### Aktifkan mode monitor:
+#### 3. Aktifkan mode monitor:
 
 ```
 sudo hcxdumptool -m [interface]
 ```
 
-#### Scan semua jarigan Wi-Fi:
+#### 4. Scan semua jarigan Wi-Fi:
 
 Active scan:
 
@@ -43,7 +43,7 @@ Passive scan:
 sudo hcxdumptool -i [interface] --rcascan=p
 ```
 
-#### Buat BPF (Berkeley Packet Filter):
+#### 5. Buat BPF (Berkeley Packet Filter):
 
 Single target:
 
@@ -57,7 +57,7 @@ Multi target:
 hcxdumptool --bpfc="wlan addr3 [bssid1] or wlan addr3 [bssid2]" > filter.bpf
 ```
 
-#### Capture Handshake dan PMKID
+#### 6. Capture Handshake dan PMKID
 
 Capture handshake:
 
@@ -71,7 +71,7 @@ Capture PMKID:
 sudo hcxdumptool -i [interface] -w [output] --bpf=[file_bpf] --rds=2 --disable_disassociation --exitoneapol=1
 ```
 
-#### Konfirmasi Hasil Capture
+#### 7. Konfirmasi Hasil Capture
 
 Capture handshake:
 
