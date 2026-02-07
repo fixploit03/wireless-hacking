@@ -6,7 +6,7 @@ Homepage: [https://w1.fi/wpa_supplicant/](https://w1.fi/wpa_supplicant/)
 
 ```
 sudo apt-get update
-sudo apt-get install wpasupplicant
+sudo apt-get install wpasupplicant isc-dhcp-client
 ```
 
 ## Cara Menggunakan
