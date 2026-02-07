@@ -6,7 +6,7 @@ Homepage: [https://github.com/ZerBea/hcxdumptool](https://github.com/ZerBea/hcxd
 
 ```
 sudo apt-get update
-sudo apt-get install hcxdumptool
+sudo apt-get install hcxdumptool tshark
 ```
 
 ## Cara Menggunakan
