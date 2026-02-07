@@ -11,6 +11,9 @@ sudo apt-get install hcxdumptool tshark
 
 ## Cara Menggunakan
 
+> [!note]
+> Versi `hcxdumptool` yang saya gunakan adalah versi 7.0.0
+
 #### 1. Melihat daftar interface yang tersedia:
 
 ```
